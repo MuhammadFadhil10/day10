@@ -1,10 +1,10 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"html/template"
 	"mvcweb/connection"
+	"mvcweb/controller"
 	"net/http"
 	"strconv"
 
@@ -27,13 +27,13 @@ func main() {
 
 	// router
 	// get
-	router.HandleFunc("/", getHome).Methods("GET")
+	router.HandleFunc("/", controller.GetHome).Methods("GET")
 	router.HandleFunc("/form-add-project", getAddProject).Methods("GET")
 	router.HandleFunc("/form-edit-project/{index}", getEditProject).Methods("GET")
 	router.HandleFunc("/contact-me", getContactMe).Methods("GET")
 	router.HandleFunc("/project/{projectId}", getProjectDetail).Methods("GET")
 	// post
-	router.HandleFunc("/add-project", postAddProject).Methods("POST")
+	router.HandleFunc("/add-project", controller.PostAddProject).Methods("POST")
 	router.HandleFunc("/update-project/{index}", updateProject).Methods("POST")
 	router.HandleFunc("/delete-project/{index}", deleteProject).Methods("POST")
 	
@@ -45,35 +45,35 @@ func main() {
 }
 
 // show homepage, where showing project from postgre database
-func getHome(w http.ResponseWriter, r *http.Request) {
+// func getHome(w http.ResponseWriter, r *http.Request) {
 
-	data, err := connection.Conn.Query(context.Background(), "SELECT name,start_date,end_date,description,technologies,image FROM public.tb_projects;")
+// 	data, err := connection.Conn.Query(context.Background(), "SELECT name,start_date,end_date,description,technologies,image FROM public.tb_projects;")
 
-	if err != nil {
-		fmt.Println(err)
-		panic(err.Error())
-	}
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		panic(err.Error())
+// 	}
 
-	var dataResult []ProjectData
+// 	var dataResult []ProjectData
 
-	for data.Next() {
-		var project = ProjectData{}
+// 	for data.Next() {
+// 		var project = ProjectData{}
 
-		var err = data.Scan(&project.Name, &project.StartDate, &project.EndDate, &project.Description, &project.Technologies, &project.Image)
-		if err != nil {
-			fmt.Println(err.Error())
-			return
-		}
+// 		var err = data.Scan(&project.Name, &project.StartDate, &project.EndDate, &project.Description, &project.Technologies, &project.Image)
+// 		if err != nil {
+// 			fmt.Println(err.Error())
+// 			return
+// 		}
 
-		dataResult = append(dataResult, project)
-	}
+// 		dataResult = append(dataResult, project)
+// 	}
 	
-	var view, templErr = template.ParseFiles("views/index.html")	
-	if err != nil {
-		panic(templErr.Error())
-	}
-	view.Execute(w, dataResult)
-}
+// 	var view, templErr = template.ParseFiles("views/index.html")	
+// 	if err != nil {
+// 		panic(templErr.Error())
+// 	}
+// 	view.Execute(w, dataResult)
+// }
 
 func getContactMe(w http.ResponseWriter, r *http.Request) {
 	var view, err = template.ParseFiles("views/contact.html")	
@@ -104,28 +104,28 @@ type ProjectData struct {
 }
 
 var projects []ProjectData 
-func postAddProject(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+// func postAddProject(w http.ResponseWriter, r *http.Request) {
+// 	r.ParseForm()
 	
-	// name := r.PostForm.Get("name")
-	// description := r.PostForm.Get("description")
-	// startDate := r.PostForm.Get("start-date")
-	// endDate := r.PostForm.Get("end-date")
-	// techlist := r.PostForm["checkbox"]
+// 	// name := r.PostForm.Get("name")
+// 	// description := r.PostForm.Get("description")
+// 	// startDate := r.PostForm.Get("start-date")
+// 	// endDate := r.PostForm.Get("end-date")
+// 	// techlist := r.PostForm["checkbox"]
 
-	// var arrData = ProjectData {
-	// 	Name: name,
-	// 	Description: description,
-	// 	StartDate: startDate,
-	// 	EndDate: endDate,
-	// 	Checkbox: techlist,
-	// }
+// 	// var arrData = ProjectData {
+// 	// 	Name: name,
+// 	// 	Description: description,
+// 	// 	StartDate: startDate,
+// 	// 	EndDate: endDate,
+// 	// 	Checkbox: techlist,
+// 	// }
 
-	// projects = append(projects, arrData)
+// 	// projects = append(projects, arrData)
 	
 
-	http.Redirect(w,r,"/form-add-project", http.StatusFound)
-}
+// 	http.Redirect(w,r,"/form-add-project", http.StatusFound)
+// }
 
 
 func getAddProject(w http.ResponseWriter, r *http.Request) {
