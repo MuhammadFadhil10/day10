@@ -11,7 +11,7 @@ import (
 var Conn *pgx.Conn
 var err error
 
-func DatabaseConnect() {
+func DatabaseConnect(callback func()) {
 	postgreUrl := "postgres://postgres:1010@localhost:5432/db_myproject";
 
 	Conn, err = pgx.Connect(context.Background(), postgreUrl)
@@ -21,7 +21,9 @@ func DatabaseConnect() {
 		return
 	}
 
-	fmt.Println("Database connected!")
+	fmt.Println("Database connected!");
+
+	callback()
 
 
 

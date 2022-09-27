@@ -86,7 +86,7 @@
 		>
 			<h1>Update Project</h1>
 			<p id="error-message"></p>
-			<form action="/update-project/{{.index}}" method="POST">
+			<form action="/update-project/{{.Id}}" method="POST">
 				<div class="form-floating mb-3">
 					<input
 						type="text"
@@ -94,7 +94,7 @@
 						class="form-control shadow"
 						id="floatingInput"
 						placeholder="name@example.com"
-						value="{{.data.Name}}"
+						value="{{.Name}}"
 					/>
 					<label for="floatingInput">Project Name</label>
 				</div>
@@ -103,14 +103,14 @@
 					<input
 						type="date"
 						name="start-date"
-						value="{{.data.StartDate}}"
+						value="{{.StringStartDate}}"
 						aria-label="First name"
 						class="form-control"
 					/>
 					<input
 						type="date"
 						name="end-date"
-						value="{{.data.EndDate}}"
+						value="{{.StringEndDate}}"
 						aria-label="Last name"
 						class="form-control"
 					/>
@@ -122,8 +122,7 @@
 						placeholder="Leave a comment here"
 						id="floatingTextarea"
 					>
-					{{.data.Description}}
-					</textarea
+{{.Description}}</textarea
 					>
 					<label for="floatingTextarea">Description</label>
 				</div>

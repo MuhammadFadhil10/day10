@@ -40,7 +40,43 @@ nav {
 
 .project-card {
 	width: 30%;
-	height: 600px;
+	height: 400px;
+	/* background-color: green; */
+}
+.project-card img {
+	width: 100%;
+	height: 50%;
+}
+.project-card .title {
+	/* background-color: red; */
+	height: 50px;
+	line-height: 1px;
+	padding: 0 10px;
+}
+.duration {
+	font-size: 15px;
+}
+.project-card .body {
+	height: 10%;
+	line-height: 1.1rem;
+	padding: 0 10px;
+	/* background-color: blue; */
+}
+.project-card .icon-list {
+	padding: 0 10px;
+	/* background-color: rgb(155, 128, 10); */
+}
+.project-card .icon-list img {
+	width: 25px;
+	height: 25px;
+	/* background-color: gray; */
+}
+/* .project-card .action {
+	 background-color: rgb(15, 146, 135); 
+} */
+.project-card .action button {
+	width: auto;
+	font-size: 1rem;
 }
 
 .button-fill {

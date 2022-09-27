@@ -184,34 +184,34 @@
 				id="blog-container"
 			>
 				{{range $index, $data := . }}
-				<div class="card project-card shadow p-2 d-flex justify-content-around">
-					<img src="{{$data.Image}}" alt="" srcset="" />
-					<div class="title">
-						<h2>{{$data.Name}}</h2>
-						<p class="text-muted">Durasi: 3 bulan</p>
+				<div
+					class="card project-card shadow gap-1 d-flex flex-column justify-content-around"
+				>
+					<img src="{{$data.Image}}" alt="thumbnail" />
+					<div class="title d-flex flex-column justify-content-start">
+						<h1 class="fs-4">{{$data.Name}}</h1>
+						<p class="text-muted duration">Duration: {{$data.Duration}}</p>
 					</div>
-					<div class="body">
+					<div class="body fs-6">
 						<p>{{$data.Description}}</p>
 					</div>
-					<div class="button-list d-flex gap-3">
+					<div class="icon-list d-flex gap-3">
 						{{range $tech := $data.Technologies}}
-
 						<img
 							src="static/assets/icon/{{$tech}}.png"
-							alt=""
 							width="25px"
 							height="25px"
 						/>
 						{{end}}
 					</div>
-					<div class="action d-flex gap-3 align-self-center">
-						<form action="/project/{{$index}}" method="GET">
+					<div class="action d-flex gap-1 align-self-center">
+						<form action="/project/{{$data.Id}}" method="GET">
 							<button class="btn button-fill">Project detail</button>
 						</form>
-						<form action="/form-edit-project/{{$index}}" method="GET">
+						<form action="/form-edit-project/{{$data.Id}}" method="GET">
 							<button class="btn button-fill">Edit</button>
 						</form>
-						<form action="/delete-project/{{$index}}" method="POST">
+						<form action="/delete-project/{{$data.Id}}" method="POST">
 							<button class="btn btn-outline-danger">Delete</button>
 						</form>
 					</div>

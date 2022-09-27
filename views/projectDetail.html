@@ -82,30 +82,30 @@
 			</h1>
 			<div class="project-header d-flex gap-5 mb-5">
 				<img
-					src="/static/assets/image/character-1.webp"
+					src="{{.Image}}"
 					alt=""
 					class="project-thumbnail rounded"
 					width="60%"
 					height="100%"
 				/>
-				<div class="project-info">
+				<div class="project-info w-75">
 					<div class="top d-flex flex-column">
 						<h2>Duration</h2>
 						<ul class="list-style d-flex flex-column gap-3">
-							<li class="list-group-item date-range-detail d-flex gap-2">
+							<li class="list-group-item date-range-detail d-flex gap-2 h-50">
 								<img
 									src="/static/assets/icon/calendar.png"
 									alt="calendar-icon"
 									width="25px"
 								/>
-								{{.StartDate}} - {{.EndDate}}
+								{{.StringStartDate}} - {{.StringEndDate}}
 							</li>
 							<li class="list-group-item duration-detail d-flex gap-2">
 								<img
 									src="/static/assets/icon/clock.png"
 									alt="clock-icon"
 									width="25px"
-								/>1 Month
+								/>{{.Duration}}
 							</li>
 						</ul>
 					</div>
@@ -113,7 +113,7 @@
 						<h2>Technologies</h2>
 
 						<ul class="list-style tech-list d-flex flex-column gap-3">
-							{{range $tech := .Checkbox}}
+							{{range $tech := .Technologies}}
 							<li class="list-group-item react-list d-flex gap-2">
 								<img
 									src="/static/assets/icon/{{$tech}}.png"
