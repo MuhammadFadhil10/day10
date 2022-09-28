@@ -1,7 +1,6 @@
 package helper
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -16,7 +15,6 @@ func CutString(text string, length int) string {
 			result = strings.Join(str, "") + "..."
 		} 
 	}
-	fmt.Println(result)
 	if result != "" {
 		return result
 	}

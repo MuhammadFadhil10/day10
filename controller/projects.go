@@ -23,7 +23,7 @@ type ProjectData struct {
 
 func GetHome(w http.ResponseWriter, r *http.Request) {
 
-	data, err := connection.Conn.Query(context.Background(), "SELECT id,name,start_date,end_date,description,technologies,image FROM public.tb_projects;")
+	data, err := connection.Conn.Query(context.Background(), "SELECT id,name,start_date,end_date,description,technologies,image FROM public.tb_projects ORDER BY posted_at DESC")
 
 	if err != nil {
 		fmt.Println(err)
@@ -136,13 +136,10 @@ func UpdateProject(w http.ResponseWriter, r *http.Request) {
 	endDate := r.PostForm.Get("end-date")
 	description := r.PostForm.Get("description")
 	checkbox := r.PostForm["checkbox"]
-	if checkbox == nil {
-		checkbox = append(checkbox, "")
-	}
 	
 	queryString2 := `
 		UPDATE public.tb_projects
-		SET name=$1, start_date=$2, end_date=$3, description=$4, technologies=$5
+		SET name=$1, start_date=$2, end_date=$3, description=$4, technologies=array_cat(technologies, $5)
 		WHERE id = ($6)
 	`
 
